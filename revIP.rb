@@ -13,7 +13,7 @@ puts ' _____                              _____ _____
 |_|  \_\___| \_/ \___|_|  |___/\___|_____|_| ~ by '.colorize(:yellow) + 'AnonGuy'.colorize(:magenta)
 
 print 'Greets to ~ '.colorize(:green)
-leets.each { |leet| if (leet == leets.last) then (puts leet.colorize(:cyan)) else (print leet.colorize(:cyan) + ' -- ') end } # .. I know.
+leets.each { |leet| (leet == leets.last ? (puts leet.colorize(:cyan)) : (print leet.colorize(:cyan) + ' -- ')) } # .. I know.
 puts sep
 
 print 'IP/Domain --> '.colorize(:red)
@@ -39,12 +39,12 @@ if parsed['status'] == 'Fail'
 	abort('[!] '.colorize(:red) + parsed['message'].split('. ')[0] + "\n#{sep}\n")
 else
 	puts 'Target            -- '.colorize(:red) + parsed['remoteIpAddress']
-	puts 'Number of Domains -- '.colorize(:red) + parsed['domainCount']; len = parsed['domainCount']
+	puts 'Number of Domains -- '.colorize(:red) + parsed['domainCount']; len = parsed['domainCount'].length
 	puts sep
 
 	domains = parsed['domainArray']
 	puts 'Domains -- '.colorize(:red)
 	domains.each.with_index(1) { |domain, index|
-		puts '[ '.colorize(:cyan) + (if(len.length == 2) then(index.to_s.rjust(2, '0').colorize(:red)) elsif(len.length == 3) then(index.to_s.rjust(3, '0').colorize(:red)) else (index.to_s.colorize(:red)) end) + ' ]'.colorize(:cyan) + ' -- '+ '[ '.colorize(:cyan) + domain[0].colorize(:green) + ' ]'.colorize(:cyan) + ' -- ' + '[ '.colorize(:cyan) + statusCode(domain[0]).colorize(:yellow) + ' ]'.colorize(:cyan) # .. don't
+		puts '[ '.colorize(:cyan) + (if(len == 2) then(index.to_s.rjust(2, '0').colorize(:red)) elsif(len == 3) then(index.to_s.rjust(3, '0').colorize(:red)) else (index.to_s.colorize(:red)) end) + ' ]'.colorize(:cyan) + ' -- '+ '[ '.colorize(:cyan) + domain[0].colorize(:green) + ' ]'.colorize(:cyan) + ' -- ' + '[ '.colorize(:cyan) + statusCode(domain[0]).colorize(:yellow) + ' ]'.colorize(:cyan) # .. don't
 	}
 end

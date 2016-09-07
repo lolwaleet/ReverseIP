@@ -14,7 +14,7 @@ ReverseIP is a ruby-based reverse IP-lookup tool, which finds all domains hosted
 
 After you've installed the gem, you may move the ReverseIP folder to your homedir ~/ and execute this command ..
 ```sh
-$ echo "alias ReverseIP='ruby revIP.rb'" >> ~/.bashrc
+$ echo "alias ReverseIP='ruby ~/revIP.rb'" >> ~/.bashrc
 ```
 
 ~ Abk Khan [ @asystolik ]
