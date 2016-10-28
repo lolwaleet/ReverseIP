@@ -29,9 +29,9 @@ def statusCode(site)
 		Net::HTTP.start(site, 80) {|http|
 			response = http.head('/')
 		}
-		return response.code
+		return response.code.colorize(:yellow)
 	rescue StandardError
-		return ':('
+		return '???'.colorize(:red)
 	end
 end
 
@@ -45,6 +45,7 @@ else
 	domains = parsed['domainArray']
 	puts 'Domains -- '.colorize(:red)
 	domains.each.with_index(1) { |domain, index|
-		puts '[ '.colorize(:cyan) + (if(len == 2) then(index.to_s.rjust(2, '0').colorize(:red)) elsif(len == 3) then(index.to_s.rjust(3, '0').colorize(:red)) else (index.to_s.colorize(:red)) end) + ' ]'.colorize(:cyan) + ' -- '+ '[ '.colorize(:cyan) + domain[0].colorize(:green) + ' ]'.colorize(:cyan) + ' -- ' + '[ '.colorize(:cyan) + statusCode(domain[0]).colorize(:yellow) + ' ]'.colorize(:cyan) # .. don't
+		puts '[ '.colorize(:cyan) + (if(len == 2) then(index.to_s.rjust(2, '0').colorize(:red)) elsif(len == 3) then(index.to_s.rjust(3, '0').colorize(:red)) else (index.to_s.colorize(:red)) end) + ' ]'.colorize(:cyan) + ' -- ' + '[ '.colorize(:cyan) + domain[0].colorize(:green) + ' ] '.colorize(:cyan) + '-'*(domains.flatten.max_by(&:size).length-domain[0].length) + '-' + ' [ '.colorize(:cyan) + statusCode(domain[0]) + ' ]'.colorize(:cyan) # .. don't
 	}
 end
+puts sep
