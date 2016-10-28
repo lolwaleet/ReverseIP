@@ -4,7 +4,7 @@ ReverseIP is a ruby-based reverse IP-lookup tool, which finds all domains hosted
 
 ### Screenshot(s)
 
-![ReverseIP](http://i.imgur.com/f0KhImX.png)
+![ReverseIP](http://s18.postimg.org/t25lck4jd/Rev_IPUpdated.png)
 
 ### ⚠️ Requirements
 
