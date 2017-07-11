@@ -3,8 +3,8 @@
 ReverseIP is a ruby-based reverse IP-lookup tool, which finds all domains hosted on a web server and returns the HTTP status code of those domains.
 
 ### Screenshot(s)
-
-![ReverseIP](http://s18.postimg.org/t25lck4jd/Rev_IPUpdated.png)
+[Old Pic]:(http://s18.postimg.org/t25lck4jd/Rev_IPUpdated.png)
+![ReverseIP](http://i.imgur.com/NY4vlM4.png)
 
 ### ⚠️ Requirements
 
