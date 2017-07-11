@@ -1,8 +1,9 @@
+require 'json'
 require 'colorize'
 require 'net/http'
-require 'json'
+require 'mechanize'
 
-sep      = ('-'*60).colorize(:cyan)
+sep      = ('-'*85).colorize(:cyan)
 leets    = [ 'T3N38R15', 'MakMan', 'Maini', 'MithaiWala' ] 
 
 puts ' _____                              _____ _____  
@@ -35,6 +36,16 @@ def statusCode(site)
 	end
 end
 
+def getCMS(site) # lotta fps .-.
+	cms = ''
+	begin
+		cms  = Mechanize.new.get('http://' + site).at('meta[name="generator"]')[:content]
+		return cms.to_s.colorize(:yellow)
+	rescue StandardError
+		return '???'.colorize(:red)
+	end
+end
+
 if parsed['status'] == 'Fail'
 	abort('[!] '.colorize(:red) + parsed['message'].split('. ')[0] + "\n#{sep}\n")
 else
@@ -44,8 +55,12 @@ else
 
 	domains = parsed['domainArray']
 	puts 'Domains -- '.colorize(:red)
-	domains.each.with_index(1) { |domain, index|
-		puts '[ '.colorize(:cyan) + (if(len == 2) then(index.to_s.rjust(2, '0').colorize(:red)) elsif(len == 3) then(index.to_s.rjust(3, '0').colorize(:red)) else (index.to_s.colorize(:red)) end) + ' ]'.colorize(:cyan) + ' -- ' + '[ '.colorize(:cyan) + domain[0].colorize(:green) + ' ] '.colorize(:cyan) + '-'*(domains.flatten.max_by(&:size).length-domain[0].length) + '-' + ' [ '.colorize(:cyan) + statusCode(domain[0]) + ' ]'.colorize(:cyan) # .. don't
+	domains.each.with_index(1) {|domain, index|
+		dashes     = '-' * (domains.flatten.max_by(&:size).length - domain[0].length + 1)
+		httpStatus = statusCode(domain[0])
+		cms        = getCMS(domain[0])
+		
+		puts '[ '.colorize(:cyan) + index.to_s.rjust(len, '0').colorize(:red) + ' ]'.colorize(:cyan) + ' -- ' + '[ '.colorize(:cyan) + domain[0].to_s.colorize(:green) + ' ] '.colorize(:cyan) + dashes.to_s + ' [ '.colorize(:cyan) + httpStatus.to_s + ' ]'.colorize(:cyan) + ' [ '.colorize(:cyan) + cms + ' ]'.colorize(:cyan)
 	}
 end
 puts sep
