@@ -3,7 +3,7 @@ require 'colorize'
 require 'net/http'
 require 'mechanize'
 
-sep      = ('-'*85).colorize(:cyan)
+sep      = ('-'*86).colorize(:cyan)
 leets    = [ 'T3N38R15', 'MakMan', 'Maini', 'MithaiWala' ] 
 
 puts ' _____                              _____ _____  
@@ -20,7 +20,7 @@ puts sep
 print 'IP/Domain --> '.colorize(:red)
 ip     = gets.chomp
 
-json   = Net::HTTP.post_form(URI.parse('http://domains.yougetsignal.com/domains.php'), { 'remoteAddress' => ip, 'key' => '' }).body
+json   = Mechanize.new.post('http://domains.yougetsignal.com/domains.php', { 'remoteAddress' => ip, 'key' => '' }).body
 parsed = JSON.parse(json)
 puts sep
 
@@ -39,7 +39,7 @@ end
 def getCMS(site) # lotta fps .-.
 	cms = ''
 	begin
-		cms  = Mechanize.new.get('http://' + site).at('meta[name="generator"]')[:content]
+		cms  = Mechanize.new.get('http://' + site).at('meta[name="generator"]')[:content][0..50]
 		return cms.to_s.colorize(:yellow)
 	rescue StandardError
 		return '???'.colorize(:red)
