@@ -8,7 +8,8 @@ ReverseIP is a ruby-based reverse IP-lookup tool, which finds all domains hosted
 
 ### ⚠️ Requirements
 
-~ colorize  [ `sudo gem install colorize` ]
+~ mechanize  [ `sudo gem install mechanize` ]
+\~ colorize [ `sudo gem install colorize` ]
 
 ### Installing
 
