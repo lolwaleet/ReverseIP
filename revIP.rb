@@ -21,7 +21,7 @@ puts sep
 print 'IP/Domain --> '.colorize(:red)
 ip     = gets.chomp
 
-json   = Mechanize.new.post('http://domains.yougetsignal.com/domains.php', { 'remoteAddress' => ip, 'key' => '' }).body
+json   = Mechanize.new.post('https://domains.yougetsignal.com/domains.php', { 'remoteAddress' => ip, 'key' => '' }, 'Content-type' => 'application/x-www-form-urlencoded').body
 parsed = JSON.parse(json)
 puts sep
 
@@ -45,7 +45,7 @@ def getCMS(site) # lotta fps .-.
 	rescue StandardError; end
 end
 
-if parsed['status'] == 'Fail'
+if parsed['status'] == 'failure' || parsed['status'] == 'failure'
 	abort('[!] '.colorize(:red) + parsed['message'].split('. ')[0] + "\n#{sep}\n")
 else
 	puts 'Target            -- '.colorize(:red) + parsed['remoteIpAddress']
