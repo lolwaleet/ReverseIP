@@ -1,6 +1,7 @@
 # ~ Reverse IP
 
 ReverseIP is a ruby-based reverse IP-lookup tool, which finds all domains hosted on a web server and returns the HTTP status code of those domains.
+This tool will help you to find the domains situated in the same server which will help you in recon in bug hunting(and u can also found a legit bug from it).
 
 ### Screenshot(s)
 [Old Pic]:(http://s18.postimg.org/t25lck4jd/Rev_IPUpdated.png)
